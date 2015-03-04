@@ -27,7 +27,7 @@ public class HelloWorldIT {
 
     @Test
     public void testPing() throws Exception {
-        WebClient client = WebClient.create(endpointUrl + "/hello/echo/SierraTangoNevada");
+        WebClient client = WebClient.create(endpointUrl + "/rest/hello/echo/SierraTangoNevada");
         Response r = client.accept("text/plain").get();
         assertEquals(Response.Status.OK.getStatusCode(), r.getStatus());
         String value = IOUtils.toString((InputStream)r.getEntity());
@@ -40,7 +40,7 @@ public class HelloWorldIT {
         providers.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
         JsonBean inputBean = new JsonBean();
         inputBean.setVal1("Maple");
-        WebClient client = WebClient.create(endpointUrl + "/hello/jsonBean", providers);
+        WebClient client = WebClient.create(endpointUrl + "/rest/hello/jsonBean", providers);
         Response r = client.accept("application/json")
             .type("application/json")
             .post(inputBean);
