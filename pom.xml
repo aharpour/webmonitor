@@ -12,6 +12,11 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>com.tdclighthouse.hippo</groupId>
+      <artifactId>hippo-common-tools</artifactId>
+      <version>0.4.21</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-frontend-jaxrs</artifactId>
       <version>3.0.4</version>
@@ -21,6 +26,14 @@
       <artifactId>cxf-rt-rs-client</artifactId>
       <version>3.0.4</version>
     </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+
     <dependency>
       <groupId>org.codehaus.jackson</groupId>
       <artifactId>jackson-core-asl</artifactId>
@@ -47,6 +60,16 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.3.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.6.1</version>
+    </dependency>
   </dependencies>
   <build>
     <pluginManagement>
@@ -55,6 +78,19 @@
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>javax.mail</groupId>
+              <artifactId>mail</artifactId>
+              <version>1.4.5</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <contextFile>${project.basedir}\src\config\context.xml</contextFile>
+            <systemProperties>
+              <monitor.config>${project.basedir}\src\config\monitorConfig.json</monitor.config>
+            </systemProperties>
+          </configuration>
           <executions>
             <execution>
               <id>default-cli</id>
@@ -91,6 +127,12 @@
     </pluginManagement>
 
   </build>
+  <repositories>
+    <repository>
+      <id>openweb-maven-public</id>
+      <url>https://maven.open-web.nl/content/groups/public/</url>
+    </repository>
+  </repositories>
   <profiles>
     <profile>
       <id>test</id>

@@ -1,4 +1,4 @@
-package nl.openweb.monitor.webmonitor;
+package nl.openweb.monitor.rest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 
-import nl.openweb.monitor.webmonitor.JsonBean;
+import nl.openweb.monitor.rest.JsonBean;
 
 import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;

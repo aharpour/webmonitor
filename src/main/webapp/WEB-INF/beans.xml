@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation=" http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
-    <import resource="classpath:META-INF/cxf/cxf.xml"/>
-    <context:property-placeholder/>
-    <context:annotation-config/>
-    <bean class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer"/>
-    <bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer"/>
-    <jaxrs:server id="services" address="/">
-        <jaxrs:serviceBeans>
-            <bean class="nl.openweb.monitor.webmonitor.HelloWorld"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider"/>
-        </jaxrs:providers>
-    </jaxrs:server>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+                      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+                      http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
+                      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+                      http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
+  <import resource="classpath:META-INF/cxf/cxf.xml" />
+  <context:property-placeholder />
+  <context:annotation-config />
+
+  <jee:jndi-lookup id="mailSession" jndi-name="mail/Session" />
+
+  <bean id="mailClient" class="com.tdclighthouse.commons.mail.util.MailClient">
+    <constructor-arg ref="mailSession" />
+  </bean>
+
+  <bean class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer" />
+  <bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer" />
+
+  <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
+
+  <bean id="config" class="nl.openweb.monitor.ConfigFactory">
+    <property name="objectMapper" ref="objectMapper" />
+  </bean>
+
+  <bean class="nl.openweb.monitor.Core" />
+
+  <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+    <property name="corePoolSize" value="5" />
+    <property name="maxPoolSize" value="10" />
+    <property name="waitForTasksToCompleteOnShutdown" value="true" />
+  </bean>
+
+  <jaxrs:server id="services" address="/">
+    <jaxrs:serviceBeans>
+      <bean class="nl.openweb.monitor.rest.HelloWorld" />
+    </jaxrs:serviceBeans>
+    <jaxrs:providers>
+      <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
+    </jaxrs:providers>
+  </jaxrs:server>
 </beans>

@@ -1,4 +1,4 @@
-package nl.openweb.monitor.webmonitor;
+package nl.openweb.monitor.rest;
 
 
 public class JsonBean {

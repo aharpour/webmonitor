@@ -1,0 +1,17 @@
+{
+  "frequency": 1000,
+  "recoveryEmailsubject": "The server is back to normal.",
+  "recoveryEmailBody": "recoveryEmailBody",
+  "subject": "Server is not reachable",
+  "emailBody": "Server is not reachable",
+  "fromAddress": "monitor@openweb.nl",
+  "toAddress": [
+    "ebrahim@openweb.nl"
+  ],
+  "pages": [
+    {
+      "url": "http://openweb.nl",
+      "responseContentType": "text/html"
+    }
+  ]
+}
