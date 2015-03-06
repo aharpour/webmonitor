@@ -11,6 +11,8 @@ public class Config {
     private String emailBody;
     private String subject;
     private String fromAddress;
+    private int connectTimeout;
+    private int readTimeout;
     private String[] toAddress;
     private List<Page> pages;
 
@@ -76,6 +78,22 @@ public class Config {
 
     public void setRecoveryEmailBody(String recoveryEmailBody) {
         this.recoveryEmailBody = recoveryEmailBody;
+    }
+
+    public int getConnectTimeout() {
+        return connectTimeout;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public int getReadTimeout() {
+        return readTimeout;
+    }
+
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
     }
 
     public static class Page {

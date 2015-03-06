@@ -51,7 +51,7 @@ public class Core implements ApplicationListener<ContextClosedEvent>, Initializi
                 try {
                     while (running) {
                         for (int i = 0; i < monitors.size(); i++) {
-                            exceutor.execute(monitors.get(0));
+                            exceutor.execute(monitors.get(i));
                             Thread.sleep(config.getFrequency() / monitors.size());
                         }
                     }
