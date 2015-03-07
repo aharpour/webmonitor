@@ -17,13 +17,6 @@ import org.apache.logging.log4j.Logger;
 @Path("/log")
 public class LogService {
 
-    @GET
-    @Path("/echo/{input}")
-    @Produces("text/plain")
-    public String ping(@PathParam("input") String input) {
-        return input;
-    }
-
     @POST
     @Produces("application/json")
     @Consumes("application/json")
