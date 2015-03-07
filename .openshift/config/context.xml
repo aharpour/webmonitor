@@ -30,6 +30,16 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
+	<Resource name="mail/Session" auth="Container"
+                type="javax.mail.Session"
+                mail.smtp.host="${SMTP_HOST}"
+                mail.transport.protocol="smtp"
+                mail.smtp.auth="true"
+                mail.smtp.user="${SMTP_USERNAME}"
+                password="${SMTP_PASSWORD}"
+                mail.port="25"
+                mail.debug="true"/>
+
 
     <Resource name="jdbc/MySQLDS"
               url="jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
