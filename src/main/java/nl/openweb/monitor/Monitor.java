@@ -55,9 +55,11 @@ public class Monitor implements Runnable {
     public void run() {
         try {
             Response response = call();
+            boolean checkContent = checkContent(response);
+            LOG.debug("get request to {} response body check result: {}", page.getUrl(), checkContent);
             if (response == null || !checkResponseStatus(response) || !checkResponseContentType(response)
-                    || !checkContent(response)) {
-                sendCrashedEmail(response);
+                    || !checkContent) {
+                sendCrashedEmail(response, checkContent);
             } else {
                 if (crashReported) {
                     sendRecoveryEmail();
@@ -89,7 +91,7 @@ public class Monitor implements Runnable {
             LOG.debug("get request to {} resulted in a {}", page.getUrl(), response.getStatus());
             LOG.debug("get request to {} response type check result: {}", page.getUrl(),
                     checkResponseContentType(response));
-            LOG.debug("get request to {} response body check result: {}", page.getUrl(), checkContent(response));
+
         }
     }
 
@@ -99,11 +101,11 @@ public class Monitor implements Runnable {
         crashReported = false;
     }
 
-    private void sendCrashedEmail(Response response) throws MessagingException, AddressException {
+    private void sendCrashedEmail(Response response, boolean checkContent) throws MessagingException, AddressException {
         String messageBody;
         if (response != null) {
             messageBody = MessageFormat.format(config.getEmailBody(), false, response.getStatus(),
-                    checkResponseContentType(response), checkContent(response));
+                    checkResponseContentType(response), checkContent);
         } else {
             messageBody = MessageFormat.format(config.getEmailBody(), true, null, null, null);
         }
@@ -120,6 +122,7 @@ public class Monitor implements Runnable {
             String body = IOUtils.toString((InputStream) response.getEntity());
             result = body.length() > 0;
         } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
             result = false;
         }
         return result;
