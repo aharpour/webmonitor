@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Path("/logs")
+@Path("/log")
 public class LogService {
 
     @GET

@@ -1,3 +1,20 @@
 <div id="main">
-  <h1>Test</h1>
+  <h1>Log</h1>
+  <form class="form-inline" role="form">
+    <div class="form-group">
+      <label for="logLevel">Email</label> 
+      <select class="form-control" id="logLevel" ng-model="level">
+        <option></option>
+        <option value="OFF">OFF</option>
+        <option value="FATAL">FATAL</option>
+        <option value="ERROR">ERROR</option>
+        <option value="WARN">WARN</option>
+        <option value="INFO">INFO</option>
+        <option value="DEBUG">DEBUG</option>
+        <option value="TRACE">TRACE</option>
+        <option value="ALL">ALL</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" ng-click="changeLogLevel()">Submit</button>
+  </form>
 </div>

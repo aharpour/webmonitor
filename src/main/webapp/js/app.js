@@ -11,6 +11,7 @@ angular.module('webmonitor',
       });
       $stateProvider.state('log', {
         url : '/log',
+        controller : 'logCtrl',
         templateUrl : 'templates/log.html'
       });
       $urlRouterProvider.otherwise('/');

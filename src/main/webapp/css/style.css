@@ -1,3 +1,27 @@
 #main {
 	padding: 0 15px;	
 }
+
+/* dialog classes */
+.ngdialog-content {
+	z-index: 20000;
+	position: relative;
+	width: 600px;
+	margin: auto;
+}
+
+.ngdialog-close {
+	position: absolute;
+	left: 8px;
+	top: 3px;
+	font-size: 26px;
+	font-weight: bold;
+	color: #f95454;
+}
+
+.ngdialog-content .panel-body {
+	max-height: 800px;
+	overflow-y: scroll;
+}
+
+/* end of dialog classes */
