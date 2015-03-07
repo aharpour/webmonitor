@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 
-import nl.openweb.monitor.rest.JsonBean;
+import nl.openweb.monitor.rest.LogLevel;
 
 import org.apache.cxf.helpers.IOUtils;
 import org.apache.cxf.jaxrs.client.WebClient;
@@ -38,7 +38,7 @@ public class HelloWorldIT {
     public void testJsonRoundtrip() throws Exception {
         List<Object> providers = new ArrayList<Object>();
         providers.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
-        JsonBean inputBean = new JsonBean();
+        LogLevel inputBean = new LogLevel();
         inputBean.setVal1("Maple");
         WebClient client = WebClient.create(endpointUrl + "/rest/hello/jsonBean", providers);
         Response r = client.accept("application/json")
@@ -47,7 +47,7 @@ public class HelloWorldIT {
         assertEquals(Response.Status.OK.getStatusCode(), r.getStatus());
         MappingJsonFactory factory = new MappingJsonFactory();
         JsonParser parser = factory.createJsonParser((InputStream)r.getEntity());
-        JsonBean output = parser.readValueAs(JsonBean.class);
+        LogLevel output = parser.readValueAs(LogLevel.class);
         assertEquals("Maple", output.getVal2());
     }
 }
