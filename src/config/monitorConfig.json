@@ -5,7 +5,7 @@
   "recoveryEmailsubject": "The server is back to normal.",
   "recoveryEmailBody": "recoveryEmailBody",
   "subject": "Server is not reachable",
-  "emailBody": "Server is not reachable. Timeout: {0}, response status: {1}, response context type: {2}, response content empty: {3}",
+  "emailBody": "Site \"{0}\" is not reachable. Timeout: {1}, response status: {2}, response context type: {3}, response content empty: {4}",
   "fromAddress": "monitor@openweb.nl",
   "toAddress": [
     "your@emailaddress.com"

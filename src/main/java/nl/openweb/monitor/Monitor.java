@@ -104,10 +104,10 @@ public class Monitor implements Runnable {
     private void sendCrashedEmail(Response response, boolean checkContent) throws MessagingException, AddressException {
         String messageBody;
         if (response != null) {
-            messageBody = MessageFormat.format(config.getEmailBody(), false, response.getStatus(),
+            messageBody = MessageFormat.format(config.getEmailBody(), page.getUrl(), false, response.getStatus(),
                     checkResponseContentType(response), checkContent);
         } else {
-            messageBody = MessageFormat.format(config.getEmailBody(), true, null, null, null);
+            messageBody = MessageFormat.format(config.getEmailBody(), page.getUrl(), true, null, null, null);
         }
         Mail mail = new Mail(config.getSubject(), messageBody);
         if (!crashReported) {
